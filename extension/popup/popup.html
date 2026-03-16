@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Coding Coach</title>
+  <style>
+    body {
+      width: 280px;
+      font-family: sans-serif;
+      background: #1e1e2e;
+      color: #cdd6f4;
+      padding: 16px;
+      margin: 0;
+    }
+    h2 {
+      color: #89b4fa;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+    #status {
+      font-size: 13px;
+      color: #a6e3a1;
+      margin-bottom: 12px;
+    }
+    #problem-info {
+      background: #313244;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+    #problem-info span {
+      color: #89b4fa;
+      font-weight: bold;
+    }
+    #no-problem {
+      font-size: 13px;
+      color: #f38ba8;
+    }
+    button {
+      width: 100%;
+      background: #89b4fa;
+      color: #1e1e2e;
+      border: none;
+      border-radius: 8px;
+      padding: 9px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    button:hover {
+      background: #74c7ec;
+    }
+  </style>
+</head>
+<body>
+  <h2>🧠 AI Coding Coach</h2>
+  <div id="status">Checking current page...</div>
+
+  <div id="problem-info" style="display:none;">
+    <div>📌 Problem: <span id="problem-name">—</span></div>
+    <div style="margin-top:6px;">🕐 Detected at: <span id="detected-time">—</span></div>
+  </div>
+
+  <div id="no-problem" style="display:none;">
+    ⚠️ No LeetCode problem detected.<br/>
+    Open a problem page to activate the coach.
+  </div>
+
+  <button id="open-coach-btn" style="display:none;">
+    Open Thinking Coach
+  </button>
+
+  <script src="popup.js"></script>
+</body>
+</html>
