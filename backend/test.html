@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Auth</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+        pre { background: #f0f0f0; padding: 15px; border-radius: 5px; max-width: 600px; }
+    </style>
+</head>
+<body>
+    <h1>API Tester</h1>
+    <button onclick="testRegister()">Register</button>
+    <button onclick="testLogin()">Login</button>
+    <button onclick="testGetMe()">Get Me (Protected)</button>
+    <pre id="output"></pre>
+
+    <script>
+        let savedToken = '';
+
+        function testRegister() {
+            fetch('http://localhost:5000/api/auth/register', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    name: 'John Doe',
+                    email: 'john@example.com',
+                    password: 'password123',
+                    passwordConfirm: 'password123'
+                })
+            }).then(r => r.json()).then(d => {
+                savedToken = d.token;
+                document.getElementById('output').innerText = JSON.stringify(d, null, 2);
+            });
+        }
+
+        function testLogin() {
+            fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    email: 'john@example.com',
+                    password: 'password123'
+                })
+            }).then(r => r.json()).then(d => {
+                savedToken = d.token;
+                document.getElementById('output').innerText = JSON.stringify(d, null, 2);
+            });
+        }
+
+        function testGetMe() {
+            fetch('http://localhost:5000/api/auth/me', {
+                method: 'GET',
+                headers: {'Authorization': 'Bearer ' + savedToken}
+            }).then(r => r.json()).then(d => {
+                document.getElementById('output').innerText = JSON.stringify(d, null, 2);
+            });
+        }
+    </script>
+</body>
+</html>
